@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/CenBoMin/GithubSync.git ~/GithubSync
+          git clone https://github.com/ArthurKwok0320/Cenbomin.git ~/GithubSync
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
@@ -26,11 +26,11 @@ jobs:
       - name: npm install
         
         run: |
-          cd ~/GithubSync
+          cd ~/Cenbomin
           npm install
       - name: '运行 【葱花视频】'
 
         run: |
-          cd ~/GithubSync
+          cd ~/Cenbomin
           node CONGHUA/chonghua.js
  
