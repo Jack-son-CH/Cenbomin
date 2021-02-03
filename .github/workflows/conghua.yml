@@ -1,0 +1,41 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: 葱花视频
+
+on:
+  workflow_dispatch:
+  schedule:
+     - cron: '*/30 6-23 * * *'
+  watch:
+    types: started
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+        TASKCENTERBODY: ${{ secrets.TASKCENTERBODY }}
+        SHAREBODY: ${{ secrets.SHAREBODY }}		
+        SHAREREWARDBODY: ${{ secrets.SHAREREWARDBODY }}	
+        TIMEREDBODY: ${{ secrets.TIMEREDBODY }}        
+        READBODY: ${{ secrets.READBODY }}
+
+    steps:
+      - name: Checkout
+        run: |
+          git clone https://github.com/CenBoMin/GithubSync.git ~/GithubSync
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: npm install
+        if: env.TASKCENTERBODY
+        run: |
+          cd ~/GithubSync
+          npm install
+      - name: '运行 【葱花视频】'
+        if: env.TASKCENTERBODY
+        run: |
+          cd ~/GithubSync
+          node CONGHUA/chonghua.js
+ 
